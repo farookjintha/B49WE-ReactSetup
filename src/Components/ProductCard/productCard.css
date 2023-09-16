@@ -1,0 +1,42 @@
+.product-container {
+  position: relative;
+  background-color: beige;
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+  border: 1px solid green;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+}
+
+.description {
+  background-color: brown;
+  color: antiquewhite;
+}
+
+.info {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+.few-items {
+  background-color: orange;
+  color: aliceblue;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.available {
+  background-color: green;
+  color: aliceblue;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
