@@ -3,10 +3,11 @@ import "./App.css";
 import Home from "./Components/Home/home";
 import Header from "./Components/Header/header";
 import Footer from "./Components/Footer/footer";
+import { useState } from "react";
 
 var myName = "John";
 
-const products = [
+const products_list = [
   {
     id: 1,
     name: "Apple IPhone 15",
@@ -76,10 +77,41 @@ const products = [
 ];
 
 function App() {
+  const [products, setProducts] = useState(products_list);
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (newItem) => {
+    setCartItems((cartItems) => [...cartItems, newItem]);
+    // if (cartItems.some((item) => item.id === newItem.id)) {
+    //   setCartItems((cart) =>
+    //     cart.map((item) =>
+    //       item.id === newItem.id
+    //         ? { ...item, quantity: item.quantity + 1 }
+    //         : item
+    //     )
+    //   );
+    // } else {
+    //   setCartItems((cart) => [...cart, newItem]);
+    // }
+  };
+
+  const removeFromCart = (itemToBeRemoved) => {
+    setCartItems((cartItems) =>
+      cartItems.filter((item) => item.id !== itemToBeRemoved.id)
+    );
+  };
+
   return (
     <div className="App">
-      <Header />
-      <Home products={products} name={"John"} city={"Chennai"} />
+      <Header cartCount={cartItems.length} />
+      <Home
+        products={products}
+        cartItems={cartItems}
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+        name={myName}
+        city={"Chennai"}
+      />
       <Footer />
     </div>
   );
