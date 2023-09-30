@@ -3,7 +3,14 @@ import "./App.css";
 import Home from "./Components/Home/home";
 import Header from "./Components/Header/header";
 import Footer from "./Components/Footer/footer";
+import Profile from "./Components/Profile/profile";
+import Chat from "./Components/Chat/chat";
+import Settings from "./Components/Settings/settings";
 import { useState } from "react";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Cart from "./Components/Cart/cart";
+import Product from "./Components/Product/product";
 
 var myName = "John";
 
@@ -102,18 +109,47 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Header cartCount={cartItems.length} />
-      <Home
-        products={products}
-        cartItems={cartItems}
-        addToCart={addToCart}
-        removeFromCart={removeFromCart}
-        name={myName}
-        city={"Chennai"}
-      />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Header cartCount={cartItems.length} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                products={products}
+                cartItems={cartItems}
+                addToCart={addToCart}
+                removeFromCart={removeFromCart}
+                name={myName}
+                city={"Chennai"}
+              />
+            }
+          />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+          {/* Handling Path Parameters */}
+          <Route
+            path="/products/:productName/:variant/:color"
+            element={<Product />}
+          />
+          {/* <Home
+            products={prod`ucts}
+            cartItems={cartItems}
+            addToCart={addToCart}
+            removeFromCart={removeFromCart}
+            name={myName}
+            city={"Chennai"}
+          />
+          <Profile />
+          <Settings />
+          <Chat /> */}
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 

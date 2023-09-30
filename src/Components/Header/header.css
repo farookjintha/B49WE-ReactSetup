@@ -10,6 +10,27 @@
   font-size: 24px;
   color: brown;
   font-weight: 700;
+  cursor: pointer;
+}
+
+.left {
+  display: flex;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 0 1em;
+}
+.link {
+  text-decoration: none;
+  color: brown;
+  font-weight: 700;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
 
 .right .cart-icon {
@@ -18,6 +39,7 @@
   align-items: flex-end;
   position: relative;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .cart-count {
