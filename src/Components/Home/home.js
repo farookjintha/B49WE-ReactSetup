@@ -1,7 +1,11 @@
 import "./home.css";
 import ProductCard from "../ProductCard/productCard";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = (props) => {
+  let [searchParams] = useSearchParams();
+
   // props = {
   //   products: [],
   //   name: '',
@@ -20,13 +24,7 @@ const Home = (props) => {
       <h1>PRODUCTS: </h1>
       <div className="products-container">
         {props.products.map((product, index) => (
-          <ProductCard
-            product={product}
-            cartItems={props.cartItems}
-            addToCart={props.addToCart}
-            removeFromCart={props.removeFromCart}
-            key={index}
-          />
+          <ProductCard product={product} key={index} />
         ))}
       </div>
     </div>

@@ -1,19 +1,30 @@
 import "./productCard.css";
+import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../App";
 
 const ProductCard = (props) => {
-  const { product, cartItems, addToCart, removeFromCart } = props;
+  const navigate = useNavigate();
+  const { product } = props;
+
+  const { cartItems, addToCart, removeFromCart } = useContext(AppContext); // Consuming the context from App
 
   const addingItemToCart = (item) => {
-    console.log("Adding Product: ", item);
     addToCart({ ...item, quantity: 1 });
   };
 
   const removingItemFromCart = (item) => {
     removeFromCart(item);
   };
+
   return (
     <div className="product-container">
-      <h2>Product Name: {product.name} </h2>
+      <h2
+        className="product-name"
+        onClick={() => navigate(`/products/${product.name}/256GB/red`)}
+      >
+        Product Name: {product.name}{" "}
+      </h2>
       {product.description && (
         <div className="description">{product.description}</div>
       )}

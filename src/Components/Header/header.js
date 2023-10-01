@@ -1,7 +1,13 @@
 import "./header.css";
 import CartIcon from "../../assets/icons/cart-icon.png";
+import ProfileIcon from "../../assets/icons/profile-user.png";
+
 import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AppContext } from "../../App";
+
 const Header = (props) => {
+  const { currentUser } = useContext(AppContext);
   const navigate = useNavigate(); // hook from react router dom
 
   const navigateToHome = () => {
@@ -21,20 +27,17 @@ const Header = (props) => {
         <div className="nav-container">
           <div className="nav-item">
             <Link className="link" to="/profile">
-              {" "}
-              Profile{" "}
+              Profile
             </Link>
           </div>
           <div className="nav-item">
             <Link className="link" to="/settings">
-              {" "}
-              Settings{" "}
+              Settings
             </Link>
           </div>
           <div className="nav-item">
             <Link className="link" to="/chat">
-              {" "}
-              Messages{" "}
+              Messages
             </Link>
           </div>
         </div>
@@ -49,6 +52,10 @@ const Header = (props) => {
             onClick={navigateToCart}
           />
           <span className="cart-count">{props.cartCount}</span>
+        </div>
+        <div className="profile" onClick={() => navigate("/profile")}>
+          <img src={ProfileIcon} alt="Profile" width={30} height={30} />
+          <span className="profile-name">{currentUser.name}</span>
         </div>
       </div>
     </div>

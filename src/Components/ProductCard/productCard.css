@@ -11,6 +11,14 @@
   border: 1px solid green;
 }
 
+.product-name {
+  cursor: pointer;
+}
+
+.product-name:hover {
+  text-decoration: underline;
+}
+
 .product-image {
   width: 100px;
   height: 100px;
