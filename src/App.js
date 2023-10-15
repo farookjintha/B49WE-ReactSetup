@@ -12,6 +12,8 @@ import { Routes, Route } from "react-router-dom";
 import Cart from "./Components/Cart/cart";
 import Product from "./Components/Product/product";
 import Login from "./Components/Login/login";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 const products_list = [
   {
@@ -94,6 +96,10 @@ export const AppContext = createContext(null); // Creating the context
 
 function App() {
   const [products, setProducts] = useState(products_list);
+
+  // Syntax of useState
+  // const [state, functionToUpdateState] = useState(initial_value)
+
   const [cartItems, setCartItems] = useState([]);
   const [currentUser, setCurrentUser] = useState({
     name: "",
@@ -118,27 +124,29 @@ function App() {
   }, []);
 
   return (
-    <AppContext.Provider
-      value={{ products, currentUser, cartItems, addToCart, removeFromCart }}
-    >
-      <div className="App">
-        <Header cartCount={cartItems.length} />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home products={products} />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/cart" element={<Cart cartItems={cartItems} />} />
-          {/* Handling Path Parameters */}
-          <Route
-            path="/products/:productName/:variant/:color"
-            element={<Product />}
-          />
-        </Routes>
-        <Footer />
-      </div>
-    </AppContext.Provider>
+    <Provider store={store}>
+      <AppContext.Provider
+        value={{ products, currentUser, cartItems, addToCart, removeFromCart }}
+      >
+        <div className="App">
+          <Header cartCount={cartItems.length} />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Home products={products} />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+            {/* Handling Path Parameters */}
+            <Route
+              path="/products/:productName/:variant/:color"
+              element={<Product />}
+            />
+          </Routes>
+          <Footer />
+        </div>
+      </AppContext.Provider>
+    </Provider>
   );
 }
 
@@ -153,5 +161,5 @@ export default App;
 // Component C
 
 // 1. Create the context -> createContext
-// 2 .Providing the context -> <ProductContext.Provider value={data}> </ProductContext.Provider>
-// 3. Consuming the context -> useContext
+// 2 .Providing the context -> <AppContext.Provider value={data}> //component </AppContext.Provider>
+// 3. Consuming the context -> useContext (Hook - to consume the context data)

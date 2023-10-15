@@ -1,15 +1,18 @@
 import "./cart.css";
+import { useSelector } from "react-redux";
 
 const Cart = (props) => {
   // JS LOGIC
+  const cartDataFromStore = useSelector((store) => store.cart);
+  const { cartItems } = cartDataFromStore;
 
   return (
     <div>
-      {props.cartItems && props.cartItems.length ? (
+      {cartItems && cartItems.length ? (
         <div>
           <h1>Your cart has</h1>
           <div className="list-container">
-            {props.cartItems.map((item, index) => (
+            {cartItems.map((item, index) => (
               <div key={index} className="cart-item">
                 <h2>Product: {item.name}</h2>
                 <h3>Quantity: 1</h3>

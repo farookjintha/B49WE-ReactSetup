@@ -14,6 +14,13 @@ const Home = (props) => {
   // props -> when data is sent from parent to child
   // JS LOGIC
 
+  useEffect(() => {
+    const param1 = searchParams.get("message");
+    const param2 = searchParams.get("brand");
+    console.log("Search Params: Message: ", param1);
+    console.log("Search Params: Brand: ", param2);
+  }, []);
+
   //   const { products, name, city } = props;
 
   return (

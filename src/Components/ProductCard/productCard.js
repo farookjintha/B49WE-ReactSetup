@@ -2,12 +2,22 @@ import "./productCard.css";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../App";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addItemToCart,
+  removeItemFromCart,
+} from "../../store/slices/cartSlice";
 
 const ProductCard = (props) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { product } = props;
+  const cartDataFromStore = useSelector((store) => store.cart);
 
-  const { cartItems, addToCart, removeFromCart } = useContext(AppContext); // Consuming the context from App
+  // console.log("Cart Items: ", cartDataFromStore);
+  const { cartItems } = cartDataFromStore;
+
+  const { addToCart, removeFromCart } = useContext(AppContext); // Consuming the context from App
 
   const addingItemToCart = (item) => {
     addToCart({ ...item, quantity: 1 });
@@ -49,14 +59,16 @@ const ProductCard = (props) => {
         {cartItems.some((item) => item.id === product.id) ? (
           <div
             className="remove-from-cart"
-            onClick={() => removingItemFromCart(product)}
+            // onClick={() => removingItemFromCart(product)}
+            onClick={() => dispatch(removeItemFromCart(product))}
           >
             Remove from cart
           </div>
         ) : (
           <div
             className="add-to-cart"
-            onClick={() => addingItemToCart(product)}
+            // onClick={() => addingItemToCart(product)}
+            onClick={() => dispatch(addItemToCart(product))}
           >
             Add to cart
           </div>
